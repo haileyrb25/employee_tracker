@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/haileyrb25/employee_tracker/issues"
   },
-  "homepage": "https://github.com/haileyrb25/employee_tracker#readme"
+  "homepage": "https://github.com/haileyrb25/employee_tracker#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  }
 }
