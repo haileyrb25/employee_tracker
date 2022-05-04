@@ -75,10 +75,11 @@ function viewEmployees() {
               message: 'success',
               data: rows
             });
-    })
-    .then(() => mainMenu());
+    });
+    
+});
+.then(() => mainMenu());
 }
-
 
 
 
