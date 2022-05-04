@@ -65,9 +65,21 @@ function viewEmployees() {
         let employees = rows;
         console.log("\n");
         console.table(employees)
+        const sql = 'SELECT id, department_name AS title FROM department';
+        db.query(sql, (err, rows) => {
+            if (err) {
+              res.status(500).json({ error: err.message });
+               return;
+            }
+            res.json({
+              message: 'success',
+              data: rows
+            });
     })
     .then(() => mainMenu());
 }
+
+
 
 
 
