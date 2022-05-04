@@ -24,7 +24,7 @@ VALUES
     ("Web Designer", 75000, 4),
     ("Engineer", 140000, 4);
 
-INSERT INTO employees
+INSERT INTO employee
     (first_name, last_name, role_id)
 VALUES
     ("Mike", "Myers", 1),

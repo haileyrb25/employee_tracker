@@ -1,5 +1,6 @@
 const { prompt } = require("inquirer");
-const db = require("./db");
+const express = require('express');
+const db = require("./db/query.sql");
 require("console.table");
 
 function mainMenu() {
@@ -13,12 +14,27 @@ function mainMenu() {
                     name: "View ALL employees",
                     value: "VIEW_EMPLOYEES"
                 },
-                //VIEW employees
-                //view departments
-                //view roles
-                //add employee
-                //add department
-                //update an employee role
+                {
+                    name: "View departments",
+                    value: "VIEW_DEPARTMENTS"
+                },
+                {
+                    name: "View roles",
+                    value: "VIEW_ROLES"
+                },
+                {
+                    name: "Add employee",
+                    value: "ADD_EMPLOYEE"
+                },
+                {
+                    name: "Add department",
+                    value: "ADD_DEPARTMENT"
+                },
+                {
+                    name: "Update employee role",
+                    value: "UPDATE_ROLE"
+                },
+                
 //bonus
                 //Update employee managers.
                 //View employees by manager.
