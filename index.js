@@ -1,7 +1,13 @@
 const { prompt } = require("inquirer");
 const express = require('express');
+const sequelize = require('./config/connection');
 const db = require("./db/query.sql");
-require("console.table");
+const mysql = require('mysql2');
+const cTable = require('console.table');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
 
 function mainMenu() {
     prompt([
@@ -51,8 +57,8 @@ function mainMenu() {
     ]).then(res => {
         let choices = res.choices;
         //now call the function depending on what the user chooses
-        //you can do a conditional (if conditional)
-        //switch/case
+        //can do a conditional (if conditional)
+        //or switch/case
 
     })
 }
