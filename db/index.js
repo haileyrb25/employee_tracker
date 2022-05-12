@@ -41,6 +41,12 @@ class DB {
             "INSERT INTO employee SET ?", employee
         )
     }
+
+    updateRole(employee){
+        return this.connection.promise().query(
+            "INSERT INTO employee SET ?", employee
+        )
+    }
 }
 
 module.exports = new DB(connection);

@@ -205,17 +205,54 @@ function addEmployee(){
     })
 }
 
-// update employee role
-// db.findAllemployees
-// map over all the employees in employeeChoices
-// then prompt which employee would you like to update and you will show employeechoices
-// db.findAllRoles
-// map over all the roles in roleChoices
-// then prompt which role you would like to give that employee
+function updateRole(){
+    db.findAllEmployees()
+    .then(([rows])=>{
+        let employees = rows;
+        const employeeChoices = employees.map(({ first_name, role_id})=>({
+            name: first_name,
+            value: role_id
+        }))
+        prompt([
+            
+            {
+                type: "list",
+                name: "first_name",
+                message: "Which employee would you like to update?",
+                choices: employeeChoices
+            }
+        ])
+        .then((answer)=>{
+        let upemployee = answer;
+        db.updateEmployee(upemployee)
+        .then(()=> `Updated ${upemployee.upemployee} to the database!`)
+        .then(()=> mainMenu())
+        })
+    })
+    // db.findAllRoles()
+    //     .then(([rows])=>{
+    //     let roles = rows;
+    //     const roleChoices = roles.map(({ title, department_id})=>({
+    //         name: title,
+    //         value: department_id
+    //     }))
+    //     prompt([
+    //         {
+    //             type: "list",
+    //             name: "role_id",
+    //             message: "Which role would you like to assign to that employee?",
+    //             choices: roleChoices
+    //         }
+    //     ])
+    //     .then((answer)=>{
+    //         let updatedEmployee = answer;
+    //         db.updateRole(updatedEmployee)
+    //         .then(()=> `Updated ${updatedEmployee.updatedEmployee} to the database!`)
+    //         .then(()=> mainMenu())
+    //     })
 
-// employee will be saved in an object in which youll have the id. 
-// youre going to call your backend method of updateEmployeeRole(employeeId, roleId)
-
+    // })
+}
 
 function quit() {
     console.log("Goodbye!");
