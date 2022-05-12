@@ -1,13 +1,7 @@
 const { prompt } = require("inquirer");
-const express = require('express');
-const sequelize = require('./config/connection');
-const db = require("./db/query.sql");
-const mysql = require('mysql2');
-const cTable = require('console.table');
+const db = require("./db");
 
-const app = express();
-const PORT = process.env.PORT || 3001;
-
+mainMenu()
 
 function mainMenu() {
     prompt([
@@ -33,6 +27,10 @@ function mainMenu() {
                     value: "ADD_EMPLOYEE"
                 },
                 {
+                    name: "Add role",
+                    value: "ADD_ROLE"
+                },
+                {
                     name: "Add department",
                     value: "ADD_DEPARTMENT"
                 },
@@ -40,14 +38,6 @@ function mainMenu() {
                     name: "Update employee role",
                     value: "UPDATE_ROLE"
                 },
-                
-//bonus
-                //Update employee managers.
-                //View employees by manager.
-                //View employees by department.
-                //Delete departments, roles, and employees.
-                //View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
-               
                 {
                     name: "Quit",
                     value: "QUIT"
@@ -55,39 +45,136 @@ function mainMenu() {
             ]
         }
     ]).then(res => {
-        let choices = res.choices;
+        let choices = res.choice;
+        console.log(choices)
         //now call the function depending on what the user chooses
         //can do a conditional (if conditional)
         //or switch/case
+        switch (choices) {
+            case "VIEW_EMPLOYEES":
+                viewEmployees()
+                break;
+            case "ADD_DEPARTMENT":
+                addDepartment()
+                break;
+            case "ADD_Employee":
+                addEmployee()
+                break;
+            case "ADD_ROLE":
+                addRole()
+                break;
+            case "VIEW_ROLES":
+                viewRoles()
+                break;
+        }
+
+
 
     })
 }
+
+//bonus
+//Update employee managers.
+//View employees by manager.
+//View employees by department.
+//Delete departments, roles, and employees.
+//View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
 
 
 //functions
 function viewEmployees() {
     db.findAllEmployees()
-    .then(([rows]) => {
-        let employees = rows;
-        console.log("\n");
-        console.table(employees)
-        const sql = 'SELECT id, department_name AS title FROM department';
-        db.query(sql, (err, rows) => {
-            if (err) {
-              res.status(500).json({ error: err.message });
-               return;
-            }
-            res.json({
-              message: 'success',
-              data: rows
-            });
-    });
-    
-});
-.then(() => mainMenu());
+        .then(([rows]) => {
+            let employees = rows;
+            console.log("\n");
+            console.table(employees)
+            const sql = 'SELECT id, department_name AS title FROM department';
+            // db.query(sql, (err, rows) => {
+            //     if (err) {
+            //         res.status(500).json({ error: err.message });
+            //         return;
+            //     }
+            //     res.json({
+            //         message: 'success',
+            //         data: rows
+            //     });
+            // });
+
+        })
+        .then(() => mainMenu());
 }
 
+function viewRoles(){
+    db.findAllRoles()
+    .then(([rows])=>{
+        let roles = rows;
+        console.table(roles)
+    })
+    .then(()=> mainMenu())
+}
 
+function addDepartment() {
+    prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the name of the department you would like to add?",
+        }
+    ])
+        .then((answer) => {
+            let name = answer
+            db.addDepartment(name)
+                .then(() => `Added ${name.name} to the database!`)
+                .then(() => mainMenu());
+        })
+}
+
+function addRole(){
+    db.findAllDepartments()
+    .then(([rows])=>{
+        let departments = rows;
+        const departmentChoices = departments.map(({ name, id})=>({
+            name: name,
+            value: id
+        }))
+        prompt([
+            {
+                type: "input",
+                name: "title",
+                message: "What is the title of the role?"
+            },
+            {
+                type: "input",
+                name: "salary",
+                message: "What is the salary of the role?"
+            },
+            {
+                type: "list",
+                name: "department_id",
+                message: "What department does this role fall under?",
+                choices: departmentChoices
+            }
+        ])
+        .then((answer)=>{
+            let role = answer;
+            db.addRole(role)
+            .then(()=> `Added ${role.role} to the database!`)
+            .then(()=> mainMenu())
+        })
+
+    })
+}
+
+// update employee role
+// db.findAllemployees
+// map over all the employees in employeeChoices
+// then prompt which employee would you like to update and you will show employeechoices
+// db.findAllRoles
+// map over all the roles in roleChoices
+// then prompt which role you would like to give that employee
+
+// employee will be saved in an object in which youll have the id. 
+// youre going to call your backend method of updateEmployeeRole(employeeId, roleId)
 
 
 
