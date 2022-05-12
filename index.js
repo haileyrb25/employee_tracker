@@ -165,35 +165,40 @@ function addRole(){
 }
 
 function addEmployee(){
-    db.findAllDepartments()
+    db.findAllRoles()
     .then(([rows])=>{
-        let departments = rows;
-        const departmentChoices = departments.map(({ name, id})=>({
-            name: name,
-            value: id
+        let roles = rows;
+        const roleChoices = roles.map(({ title, department_id})=>({
+            name: title,
+            value: department_id
         }))
         prompt([
             {
                 type: "input",
-                name: "title",
-                message: "What is the title of the role?"
+                name: "first_name",
+                message: "What is the first name of the employee?"
             },
             {
                 type: "input",
-                name: "salary",
-                message: "What is the salary of the role?"
+                name: "last_name",
+                message: "What is the last name of the employee?"
+            },
+            {
+                type: "input",
+                name: "manager_name",
+                message: "What is the name of their manager?"
             },
             {
                 type: "list",
-                name: "department_id",
-                message: "What department does this role fall under?",
-                choices: departmentChoices
+                name: "role_id",
+                message: "What role does this employee work for?",
+                choices: roleChoices
             }
         ])
         .then((answer)=>{
-            let role = answer;
-            db.addRole(role)
-            .then(()=> `Added ${role.role} to the database!`)
+            let employee = answer;
+            db.addEmployee(employee)
+            .then(()=> `Added ${employee.employee} to the database!`)
             .then(()=> mainMenu())
         })
 
