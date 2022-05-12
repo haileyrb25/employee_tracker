@@ -25,18 +25,18 @@ VALUES
     ("Engineer", 140000, 4);
 
 INSERT INTO employee
-    (first_name, last_name, role_id)
+    (first_name, last_name, role_id, manager_name)
 VALUES
-    ("Mike", "Myers", 1),
-    ("Adam", "Shaw", 1),
-    ("David", "Perez", 1),
-    ("Sam", "Smith", 2),
-    ("Judy", "Campos", 2),
-    ("Melissa", "Creed", 2),
-    ("Quinn", "Denver", 3),
-    ("Kayla", "Swindle", 3),
-    ("Riley", "Knight", 3),
-    ("Eddie", "Ramirez", 4),
-    ("Steven", "McIntyre", 4),
-    ("Wendy", "Abbot", 4);
+    ("Mike", "Myers", 1, "null"),
+    ("Adam", "Shaw", 1, "Mike"),
+    ("David", "Perez", 1, "Mike"),
+    ("Sam", "Smith", 2, "null"),
+    ("Judy", "Campos", 2, "Sam"),
+    ("Melissa", "Creed", 2, "Judy"),
+    ("Quinn", "Denver", 3, "null"),
+    ("Kayla", "Swindle", 3, "Quinn"),
+    ("Riley", "Knight", 3, "Quinn"),
+    ("Eddie", "Ramirez", 4, "null"),
+    ("Steven", "McIntyre", 4, "Eddie"),
+    ("Wendy", "Abbot", 4, "Eddie");
     

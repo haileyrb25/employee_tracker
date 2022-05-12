@@ -164,6 +164,42 @@ function addRole(){
     })
 }
 
+function addEmployee(){
+    db.findAllDepartments()
+    .then(([rows])=>{
+        let departments = rows;
+        const departmentChoices = departments.map(({ name, id})=>({
+            name: name,
+            value: id
+        }))
+        prompt([
+            {
+                type: "input",
+                name: "title",
+                message: "What is the title of the role?"
+            },
+            {
+                type: "input",
+                name: "salary",
+                message: "What is the salary of the role?"
+            },
+            {
+                type: "list",
+                name: "department_id",
+                message: "What department does this role fall under?",
+                choices: departmentChoices
+            }
+        ])
+        .then((answer)=>{
+            let role = answer;
+            db.addRole(role)
+            .then(()=> `Added ${role.role} to the database!`)
+            .then(()=> mainMenu())
+        })
+
+    })
+}
+
 // update employee role
 // db.findAllemployees
 // map over all the employees in employeeChoices
@@ -174,8 +210,6 @@ function addRole(){
 
 // employee will be saved in an object in which youll have the id. 
 // youre going to call your backend method of updateEmployeeRole(employeeId, roleId)
-
-
 
 
 function quit() {
