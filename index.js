@@ -103,6 +103,15 @@ function viewRoles(){
     .then(()=> mainMenu())
 }
 
+function viewDepartments(){
+    db.findAllDepartments()
+    .then(([rows])=>{
+        let departments = rows;
+        console.table(departments)
+    })
+    .then(()=> mainMenu())
+}
+
 function addDepartment() {
     prompt([
         {
