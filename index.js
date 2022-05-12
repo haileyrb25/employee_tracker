@@ -47,39 +47,40 @@ function mainMenu() {
     ]).then(res => {
         let choices = res.choice;
         console.log(choices)
-        //now call the function depending on what the user chooses
-        //can do a conditional (if conditional)
-        //or switch/case
         switch (choices) {
             case "VIEW_EMPLOYEES":
                 viewEmployees()
                 break;
-            case "ADD_DEPARTMENT":
-                addDepartment()
-                break;
-            case "ADD_Employee":
-                addEmployee()
-                break;
-            case "ADD_ROLE":
-                addRole()
+            case "VIEW_DEPARTMENTS":
+                viewDepartments()
                 break;
             case "VIEW_ROLES":
                 viewRoles()
                 break;
+            case "ADD_EMPLOYEE":
+                addEmployee()
+                break;
+            case "ADD_DEPARTMENT":
+                addDepartment()
+                break;
+            case "ADD_ROLE":
+                addRole()
+                break;
+            case "UPDATE_ROLE":
+                updateRole()
+                break;
+            case "QUIT":
+                quit()
+                break;   
         }
-
-
-
     })
 }
-
 //bonus
 //Update employee managers.
 //View employees by manager.
 //View employees by department.
 //Delete departments, roles, and employees.
 //View the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
-
 
 //functions
 function viewEmployees() {
@@ -89,17 +90,6 @@ function viewEmployees() {
             console.log("\n");
             console.table(employees)
             const sql = 'SELECT id, department_name AS title FROM department';
-            // db.query(sql, (err, rows) => {
-            //     if (err) {
-            //         res.status(500).json({ error: err.message });
-            //         return;
-            //     }
-            //     res.json({
-            //         message: 'success',
-            //         data: rows
-            //     });
-            // });
-
         })
         .then(() => mainMenu());
 }
@@ -180,6 +170,6 @@ function addRole(){
 
 
 function quit() {
-    console.log("Bye for now!");
+    console.log("Goodbye!");
     process.exit();
 };

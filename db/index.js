@@ -36,10 +36,11 @@ class DB {
         )
     }
 
-    
-
-
-
+    addEmployee(employee){
+        return this.connection.promise().query(
+            "INSERT INTO employee SET ?", employee
+        )
+    }
 }
 
 module.exports = new DB(connection);
