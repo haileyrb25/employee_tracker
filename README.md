@@ -10,7 +10,7 @@
 
 ## Overview
 
-For this challenge, I was able to utilize DBeaver and create tables with JavaScript. By creating a database, employee_db, we can keep track of all employees and also see results for different departments and roles. This is done by using using Node.js, Inquirer, and MySQL. This application can be used for many businesses to keep track of their records in a more organized and prestine way.
+For this challenge, I was able to utilize DBeaver and create tables with JavaScript. By creating a database, employee_db, we can keep track of all employees and also see results for different departments and roles. This is done by using using Node.js, Inquirer, and MySQL. This application can be used for many businesses to keep track of their records in a more organized and prestine way. You should be able to see options to view departments, roles, and employees as well as seeing the option to add roles, departments, and employees along with updating an employee.
 
 ---
 
