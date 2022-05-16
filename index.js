@@ -124,8 +124,9 @@ function addDepartment() {
             let name = answer
             db.addDepartment(name)
                 .then(() => `Added ${name.name} to the database!`)
-                .then(() => mainMenu());
+                // .then(() => mainMenu());
         })
+        .then(() => mainMenu());
 }
 
 function addRole(){
@@ -158,9 +159,9 @@ function addRole(){
             let role = answer;
             db.addRole(role)
             .then(()=> `Added ${role.role} to the database!`)
-            .then(()=> mainMenu())
+            // .then(()=> mainMenu())
         })
-
+        .then(() => mainMenu());
     })
 }
 
@@ -199,9 +200,9 @@ function addEmployee(){
             let employee = answer;
             db.addEmployee(employee)
             .then(()=> `Added ${employee.employee} to the database!`)
-            .then(()=> mainMenu())
+            // .then(()=> mainMenu())
         })
-
+        .then(() => mainMenu());
     })
 }
 
@@ -226,8 +227,9 @@ function updateRole(){
         let upemployee = answer;
         db.updateEmployee(upemployee)
         .then(()=> `Updated ${upemployee.upemployee} to the database!`)
-        .then(()=> mainMenu())
+        // .then(()=> mainMenu())
         })
+        .then(() => mainMenu());
     })
     // db.findAllRoles()
     //     .then(([rows])=>{

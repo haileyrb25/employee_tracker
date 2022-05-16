@@ -17,6 +17,15 @@ For this challenge, I was able to utilize DBeaver and create tables with JavaScr
 # Video
 
 
+![](./assets/Employee%20tracker.gif)
+
+---
+
+## Some pictures of the final product!
+
+![](./assets/screen1.png)
+![](./assets/screen2.png)
+
 
 ---
 
